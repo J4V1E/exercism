@@ -35,16 +35,24 @@ class Bob {
         return $response;
     }
 
+    //Checks if last character is '?'
     function isQuestion($input) {
         return (substr($input, -1) == '?') ? true : false;
     }
 
+    //Checks if all characters are uppercase
     function isYell($input) {
-        $pattern = '/[^a-zA-Z]/';
-        return (ctype_upper(preg_replace($pattern, '', $input))) ? true : false;
+        //Confirms all characters are in letter category
+        if (preg_match('/^[\PL]*$/', $input)) {
+            return false;
+        }
+
+        return (mb_strtoupper($input) === $input) ;
     }
 
+    //Checks if string is whitespace
     function isEmpty($input) {
+        //Removes unicode whitespace
         $input = preg_replace('/^[\pZ\pC]+|[\pZ\pC]+$/u','',$input);
         return ($input == '') ? true : false;
     }
