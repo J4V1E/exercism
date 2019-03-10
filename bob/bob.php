@@ -45,6 +45,7 @@ class Bob {
     }
 
     function isEmpty($input) {
+        $input = preg_replace('/^[\pZ\pC]+|[\pZ\pC]+$/u','',$input);
         return ($input == '') ? true : false;
     }
 }
